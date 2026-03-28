@@ -15,6 +15,16 @@
                 <flux:navlist.group heading="Platform" class="grid">
                     <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>Dashboard</flux:navlist.item>
                 </flux:navlist.group>
+                
+                @if(auth()->user()->role->name === 'admin')
+                    <flux:navlist.group heading="Admin Panel" class="grid mt-4">
+                        <flux:navlist.item icon="chart-bar" :href="route('admin.dashboard')" :current="request()->routeIs('admin.dashboard')" wire:navigate>Overview</flux:navlist.item>
+                        <flux:navlist.item icon="table-cells" :href="route('admin.tables')" :current="request()->routeIs('admin.tables')" wire:navigate>Meja & QR Code</flux:navlist.item>
+                        <flux:navlist.item icon="tag" :href="route('admin.categories')" :current="request()->routeIs('admin.categories')" wire:navigate>Kategori Menu</flux:navlist.item>
+                        <flux:navlist.item icon="clipboard-document-list" :href="route('admin.menus')" :current="request()->routeIs('admin.menus')" wire:navigate>Daftar Menu</flux:navlist.item>
+                        <flux:navlist.item icon="users" :href="route('admin.users')" :current="request()->routeIs('admin.users')" wire:navigate>Staff & Pengguna</flux:navlist.item>
+                    </flux:navlist.group>
+                @endif
             </flux:navlist>
 
             <flux:spacer />

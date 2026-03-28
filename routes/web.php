@@ -19,4 +19,14 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
 });
 
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::redirect('/', '/admin/dashboard');
+
+    Volt::route('/dashboard', 'admin.dashboard')->name('dashboard');
+    Volt::route('/tables', 'admin.tables.index')->name('tables');
+    Volt::route('/categories', 'admin.categories.index')->name('categories');
+    Volt::route('/menus', 'admin.menus.index')->name('menus');
+    Volt::route('/users', 'admin.users.index')->name('users');
+});
+
 require __DIR__.'/auth.php';
