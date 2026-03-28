@@ -16,6 +16,18 @@
                     <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>Dashboard</flux:navlist.item>
                 </flux:navlist.group>
                 
+                @if(auth()->user()->role->name === 'kitchen')
+                    <flux:navlist.group heading="Layanan Resto" class="grid mt-4">
+                        <flux:navlist.item icon="fire" :href="route('kitchen.dashboard')" :current="request()->routeIs('kitchen.dashboard')" wire:navigate>Dapur (Kitchen)</flux:navlist.item>
+                    </flux:navlist.group>
+                @endif
+                
+                @if(auth()->user()->role->name === 'kasir')
+                    <flux:navlist.group heading="Layanan Resto" class="grid mt-4">
+                        <flux:navlist.item icon="banknotes" :href="route('cashier.dashboard')" :current="request()->routeIs('cashier.dashboard')" wire:navigate>Kasir (Cashier)</flux:navlist.item>
+                    </flux:navlist.group>
+                @endif
+                
                 @if(auth()->user()->role->name === 'admin')
                     <flux:navlist.group heading="Admin Panel" class="grid mt-4">
                         <flux:navlist.item icon="chart-bar" :href="route('admin.dashboard')" :current="request()->routeIs('admin.dashboard')" wire:navigate>Overview</flux:navlist.item>

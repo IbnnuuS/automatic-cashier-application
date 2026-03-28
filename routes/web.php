@@ -29,4 +29,19 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Volt::route('/users', 'admin.users.index')->name('users');
 });
 
+// Kitchen Routes
+Route::middleware(['auth', 'role:kitchen'])->prefix('kitchen')->name('kitchen.')->group(function () {
+    Route::redirect('/', '/kitchen/dashboard');
+    Volt::route('/dashboard', 'kitchen.dashboard')->name('dashboard');
+});
+
+// Cashier Routes
+Route::middleware(['auth', 'role:kasir'])->prefix('cashier')->name('cashier.')->group(function () {
+    Route::redirect('/', '/cashier/dashboard');
+    Volt::route('/dashboard', 'cashier.dashboard')->name('dashboard');
+});
+
+// Customer Public Route (QR Order)
+Volt::route('order/{token}', 'customer.order')->name('customer.order');
+
 require __DIR__.'/auth.php';
